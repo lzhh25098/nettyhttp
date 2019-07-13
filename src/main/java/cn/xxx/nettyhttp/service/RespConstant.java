@@ -22,7 +22,7 @@ public class RespConstant {
             "晏几道早年常与诗朋酒友、歌儿舞女聚会游冶，后来时过景迁，故人星散，词人脑海中保留了一桩桩美好的记忆。该篇即为重游故地、追怀旧友而作。"
     };
     private static final Random R = new Random();
-    public String getNews(){
+    public static String getNews(){
         return NEWS[R.nextInt(NEWS.length)];
     }
 }

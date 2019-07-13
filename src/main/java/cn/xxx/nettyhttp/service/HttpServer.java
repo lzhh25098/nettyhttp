@@ -20,7 +20,7 @@ public class HttpServer {
     private static final int PORT = 8080;
     private static final EventLoopGroup loop = new NioEventLoopGroup();//表示使用Nio进行请求
     private static final ServerBootstrap strap = new ServerBootstrap();//服务端启动必备
-    private static final boolean SSL = true;//表示是否使用https协议请求
+    private static final boolean SSL = false;//表示是否使用https协议请求
 
     /**
      * Netty创建全部都是实现自AbstractBootstrap。

@@ -30,6 +30,49 @@ public class BusiHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         String result = "";
+        FullHttpRequest request = (FullHttpRequest)msg;
+        System.out.println(request.headers());
+        try {
+            //获得路径
+            String path = request.uri();
+            System.out.println("-------------------------->path:"+path);
+            //获取body
+            String body = request.content().toString();
+            System.out.println("---------------------------->body:"+ body);
+            //获取请求方法
+            HttpMethod method = request.method();
+            System.out.println("---------------------------->HttpMethod:"+ method);
+            if (!"/test".equals(path)){
+                result = "非法请求！" + path;
+                System.err.println("------------------------>result"+ result);
+                send(ctx,result,HttpResponseStatus.BAD_REQUEST);
+                return;
+            }
+            System.out.println("------------------------->收到请求:"+ method);
+            //如果是get请求
+            if (HttpMethod.GET.equals(method)){
+                //业务处理
+                System.out.println("--------------->接受到信息："+body);
+                //GET请求应答
+                result = method+"应答"+RespConstant.getNews();
+                send(ctx,result,HttpResponseStatus.OK);
+                return;
+            }
+            //如果其他请求
+            if (HttpMethod.POST.equals(method)){
+                System.out.println("--------------->收到请求:"+method);
+                //应答
+                result = method+"应答"+RespConstant.getNews();
+                send(ctx,result,HttpResponseStatus.OK);
+            }
+
+
+        }catch (Exception e){
+            System.err.println("--------------------处理请求失败----------------->"+ e.getMessage());
+            e.printStackTrace();
+        }finally {
+            request.release();
+        }
 
     }
 
