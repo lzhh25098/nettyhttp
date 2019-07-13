@@ -44,7 +44,7 @@ public class BusiHandler extends ChannelInboundHandlerAdapter {
             System.out.println("---------------------------->HttpMethod:"+ method);
             if (!"/test".equals(path)){
                 if ("/favicon.ico".equals("/favicon.ico")){
-                    return;
+                    send(null,null,HttpResponseStatus.OK);
                 }
                 result = "非法请求！" + path;
                 System.err.println("------------------------>result"+ result);
