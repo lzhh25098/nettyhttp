@@ -54,7 +54,7 @@ public class BusiHandler extends ChannelInboundHandlerAdapter {
                 //业务处理
                 System.out.println("--------------->接受到信息："+body);
                 //GET请求应答
-                result = method+"应答"+RespConstant.getNews();
+                result = method+"应答\n"+RespConstant.getNews();
                 send(ctx,result,HttpResponseStatus.OK);
                 return;
             }
